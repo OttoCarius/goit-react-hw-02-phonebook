@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 
 import { StyledList } from './ContactList.styled';
 import { StyledText } from './ContactList.styled';
+import { StyledItem } from './ContactList.styled';
+import { StyledButton } from './ContactList.styled';
 
 const ContactList = ({ contacts, onRemove }) => {
   return (
@@ -11,16 +13,18 @@ const ContactList = ({ contacts, onRemove }) => {
           <>
             {contacts.map(contact => {
               return (
-                <li key={contact.id}>
+                <StyledItem key={contact.id}>
                   <StyledText>
                     {contact.name} : {contact.number}
                   </StyledText>
-                  <button
+                  <StyledButton
                     onClick={() => {
                       onRemove(contact.id);
                     }}
-                  ></button>
-                </li>
+                  >
+                    Delete
+                  </StyledButton>
+                </StyledItem>
               );
             })}
           </>

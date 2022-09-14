@@ -17,9 +17,9 @@ class App extends Component {
     filter: '',
   };
 
-  onSubmit = (submitName, submitNumber) => {
-    if (this.state.contacts.find(contact => contact.name === submitName)) {
-      return alert(`${submitName} is already in contacts.`);
+  onSubmit = (subName, subNumber) => {
+    if (this.state.contacts.find(contact => contact.name === subName)) {
+      return alert(`${subName} is already in contacts.`);
     }
     this.setState(PreviousState => {
       return {
@@ -27,22 +27,22 @@ class App extends Component {
           ...PreviousState.contacts,
           {
             id: nanoid(),
-            name: submitName,
-            number: submitNumber,
+            name: subName,
+            number: subNumber,
           },
         ],
       };
     });
   };
 
-  deleteContact = id =>
+  handleRemoveContact = id =>
     this.setState(({ contacts }) => ({
       contacts: contacts.filter(contact => contact.id !== id),
     }));
 
   handleFilterChange = filter => this.setState({ filter });
 
-  getVisibleContacts = () => {
+  visibleContacts = () => {
     const { contacts, filter } = this.state;
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
@@ -51,7 +51,7 @@ class App extends Component {
 
   render() {
     const { filter } = this.state;
-    const visibleContacts = this.getVisibleContacts();
+    const visibleContacts = this.visibleContacts();
 
     return (
       <Box>
